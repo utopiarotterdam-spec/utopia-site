@@ -497,7 +497,15 @@ function lidLinkify(s){
     return '<a href="'+href+'" target="_blank" rel="noopener">'+disp+'</a>'+trail;
   });
 }
-function openLid(m){
+function lidSlug(m){
+  return (m.n||"lid").toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/['’]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"") || "lid";
+}
+function lidVanSlug(s){
+  return LEDEN.find(function(m){return lidSlug(m)===s;}) || null;
+}
+function openLid(m,vanHistory){
   // Fotos
   const fotoEl=document.getElementById("lidFotos");
   fotoEl.innerHTML=(m.imgs&&m.imgs.length>0)
@@ -507,12 +515,12 @@ function openLid(m){
   document.getElementById("lidRol").textContent=m.r;
   const bioEl=document.getElementById("lidBio");
   bioEl.innerHTML=m.b.split("\n").filter(l=>l.trim()).map(l=>`<p>${lidLinkify(l)}</p>`).join("");
-  go("lid");
+  go("lid",{lid:lidSlug(m)},vanHistory);
   window.scrollTo({top:document.getElementById("lid").offsetTop,behavior:"smooth"});
 }
 document.getElementById("lidTerug").addEventListener("click",()=>{
-  go("leden");
-  window.scrollTo({top:document.getElementById("leden").offsetTop,behavior:"smooth"});
+  if(history.state&&history.state.van){ history.back(); }
+  else { go("leden"); window.scrollTo({top:document.getElementById("leden").offsetTop,behavior:"smooth"}); }
 });
 function closeMember(){overlay.classList.remove("on");}
 document.getElementById("mClose").addEventListener("click",closeMember);
@@ -521,15 +529,46 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMember();});
 
 let active="toennu";
 const pages=["toennu","leden","lid","contact"];
-function go(id){
+/* Toont een scherm. extra = {lid:slug} voor een ledenpagina.
+   vanHistory=true als de aanroep uit de terug/vooruit-knop komt (dan geen nieuwe stap). */
+function toonScherm(id){
   if(!pages.includes(id))id="toennu";
   active=id;
   pages.forEach(p=>document.getElementById(p).classList.toggle("on",p===id));
   document.querySelectorAll(".menu a").forEach(a=>a.classList.toggle("on",a.dataset.go===id));
   if(id==="toennu"){requestAnimationFrame(tnReset);}
-  try{ history.replaceState(null,"","#"+id); }catch(e){}
+}
+function urlVoor(id,extra){
+  if(id==="lid"&&extra&&extra.lid) return "#lid/"+extra.lid;
+  return "#"+id;
+}
+function go(id,extra,vanHistory){
+  toonScherm(id);
+  if(vanHistory) return;               // kwam van de browserknop: geschiedenis niet aanraken
+  const url=urlVoor(id,extra);
+  const st={id:id,lid:extra&&extra.lid?extra.lid:null,van:true};
+  try{
+    // eerste echte navigatie vervangt de start-staat; daarna nieuwe stappen
+    if(history.state&&history.state.van){ history.pushState(st,"",url); }
+    else { history.replaceState(st,"",url); }
+  }catch(e){}
 }
 document.querySelectorAll("[data-go]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();var id=a.dataset.go;go(id);var el=document.getElementById(id);if(el)window.scrollTo({top:el.offsetTop,behavior:"smooth"});}));
+
+/* Terug/vooruit-knop van de browser: lees de URL en toon het juiste scherm. */
+function routeVanHash(vanHistory){
+  var h=(location.hash||"").replace(/^#/,"");
+  var mLid=h.match(/^lid\/(.+)$/);
+  if(mLid){
+    var m=lidVanSlug(mLid[1]);
+    if(m){ if(ssActive)ssOut(); openLid(m,true); return; }
+  }
+  var id=h||"toennu";
+  if(!pages.includes(id))id="toennu";
+  if(id!=="toennu"&&ssActive)ssOut();
+  toonScherm(id,true);
+}
+window.addEventListener("popstate",function(){ routeVanHash(true); });
 
 
 window.addEventListener("resize",tnUpdate);
@@ -617,6 +656,17 @@ document.querySelectorAll(".tn-colscroll").forEach(function(col){
   window.addEventListener("resize",fitWidth);
   setInterval(cycle,1500);
 })();
-go("toennu");
+/* Init: zet een basisstaat en open het scherm dat in de URL staat (voor gedeelde links). */
+(function initRoute(){
+  var h=(location.hash||"").replace(/^#/,"");
+  try{ history.replaceState({id:"toennu",lid:null,van:true},"","#toennu"); }catch(e){}
+  var mLid=h.match(/^lid\/(.+)$/);
+  if(mLid){
+    var m=lidVanSlug(mLid[1]);
+    if(m){ ssOut(); openLid(m); return; }
+  }
+  if(h&&h!=="toennu"&&pages.includes(h)){ ssOut(); go(h); return; }
+  toonScherm("toennu");
+})();
 window.addEventListener("load",tnReset);
 </script>
