@@ -1,0 +1,112 @@
+{
+  "items": [
+    {
+      "y": "nov 2026",
+      "t": "Adriaan solo in Rotown",
+      "lid": "Adriaan Persons",
+      "d": "Adriaan speelt zijn solo-act in Rotown.",
+      "imgs": [
+        {
+          "s": "media/nu/adriaan-solo-in-rotown.jpg",
+          "c": "Adriaan speelt zijn solo-act in Rotown."
+        }
+      ]
+    },
+    {
+      "y": "mei 2026",
+      "t": "Jelle bij de VPRO",
+      "lid": "Jelle Feringa",
+      "d": "Jelle is te zien in een uitzending van de VPRO.",
+      "imgs": [
+        {
+          "s": "media/nu/jelle-bij-de-vpro.jpg",
+          "c": "Jelle in een uitzending van de VPRO (NPO)."
+        }
+      ]
+    },
+    {
+      "y": "2026",
+      "t": "Lysander Klinkenberg, lid bij Utopia",
+      "lid": "Lysander Klinkenberg",
+      "d": "Bouwend architect Lysander Klinkenberg sluit zich aan bij Utopia.",
+      "imgs": [
+        {
+          "s": "media/nu/lysander-klinkenberg-lid-bij-utopia.jpg",
+          "c": "Een nieuw lid in de werkplaats."
+        }
+      ]
+    },
+    {
+      "y": "2026",
+      "t": "Rosalie op de cover van NRC",
+      "lid": "Rosalie Wammes",
+      "d": "Werk van Rosalie haalt de voorpagina van NRC.",
+      "imgs": [
+        {
+          "s": "media/nu/rosalie-op-de-cover-van-nrc.jpg",
+          "c": "Werk van Rosalie in een expositie - beeld dat de cover van NRC haalde."
+        }
+      ]
+    },
+    {
+      "y": "okt 2025",
+      "t": "Kelly op het AFFR",
+      "lid": "Kelly Vincent",
+      "d": "Kelly organiseert 'Architects of the After Hours' in Lantarenvenster.",
+      "imgs": [
+        {
+          "s": "media/nu/kelly-op-het-affr.jpg",
+          "c": "Poster voor AFPR x Weelde in Lantarenvenster, zaterdag 11 oktober, 23:00–08:00."
+        }
+      ]
+    },
+    {
+      "y": "2025",
+      "t": "Marieke wint het heksenmonument",
+      "lid": "Marieke van der Meer",
+      "d": "Marieke wint het ontwerp voor het nationale heksenmonument.",
+      "imgs": [
+        {
+          "s": "media/nu/marieke-wint-het-heksenmonument.jpg",
+          "c": "Historische gravure bij Marieke's winnende ontwerp voor het heksenmonument."
+        }
+      ]
+    },
+    {
+      "y": "2025",
+      "t": "Hans' kadeboek in het Fotomuseum",
+      "lid": "Hans van den Tol",
+      "d": "Hans' kadeboek wordt opgenomen in het Nederlands Fotomuseum.",
+      "imgs": [
+        {
+          "s": "media/nu/hans-kadeboek-in-het-fotomuseum.jpg",
+          "c": "Het Santos-pakhuis, nieuwe locatie van het Nederlands Fotomuseum."
+        }
+      ]
+    },
+    {
+      "y": "2025",
+      "t": "Hans' giraffe in een boek over Koolhaas",
+      "lid": "Hans Werlemann",
+      "d": "De giraffe van Hans speelt een rol in 'The House of Dr Koolhaas'.",
+      "imgs": [
+        {
+          "s": "media/nu/hans-giraffe-in-een-boek-over-koolhaas.jpg",
+          "c": "Cover van 'The House of Dr Koolhaas', met de giraffe van Hans."
+        }
+      ]
+    },
+    {
+      "y": "2024",
+      "t": "Maud in het Rijksmuseum van Oudheden",
+      "lid": "Maud Timmermans",
+      "d": "Keramist Maud Timmermans exposeert van april tot augustus 2024 in het Rijksmuseum van Oudheden in Leiden, met haar project TIMM x Thole.",
+      "imgs": [
+        {
+          "s": "media/nu/maud-in-het-rijksmuseum-van-oudheden.jpg",
+          "c": "Werk van Maud Timmermans (TIMM ceramics) tentoongesteld in het Rijksmuseum van Oudheden, Leiden — april t/m augustus 2024."
+        }
+      ]
+    }
+  ]
+}

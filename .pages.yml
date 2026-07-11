@@ -1,0 +1,99 @@
+media:
+  input: media
+  output: media
+
+content:
+  - name: nu
+    label: "Nu — tijdlijn"
+    description: "Recente gebeurtenissen van leden. Nieuwste bovenaan."
+    type: file
+    path: data/nu.json
+    fields:
+      - name: items
+        label: "Gebeurtenissen"
+        type: object
+        list: true
+        fields:
+          - name: t
+            label: "Titel"
+            type: string
+            required: true
+          - name: y
+            label: "Jaartal of datum (bijv. 'okt 2025')"
+            type: string
+          - name: lid
+            label: "Gekoppeld lid (exact dezelfde naam als op de ledenpagina)"
+            type: string
+          - name: d
+            label: "Beschrijving"
+            type: text
+          - name: imgs
+            label: "Foto's"
+            type: object
+            list: true
+            fields:
+              - name: s
+                label: "Foto"
+                type: image
+              - name: c
+                label: "Bijschrift (verschijnt bij aanwijzen)"
+                type: string
+
+  - name: toen
+    label: "Toen — tijdlijn"
+    description: "Historische gebeurtenissen. Oudste bovenaan."
+    type: file
+    path: data/toen.json
+    fields:
+      - name: items
+        label: "Gebeurtenissen"
+        type: object
+        list: true
+        fields:
+          - name: t
+            label: "Titel"
+            type: string
+            required: true
+          - name: y
+            label: "Jaartal (bijv. '1978' of 'jaren '80')"
+            type: string
+          - name: d
+            label: "Beschrijving"
+            type: text
+          - name: imgs
+            label: "Foto's"
+            type: object
+            list: true
+            fields:
+              - name: s
+                label: "Foto"
+                type: image
+              - name: c
+                label: "Bijschrift (verschijnt bij aanwijzen)"
+                type: string
+
+  - name: leden
+    label: "Leden"
+    description: "Alle leden. Verwijderen = het blokje van het lid weghalen."
+    type: file
+    path: data/leden.json
+    fields:
+      - name: items
+        label: "Leden (alfabetisch op achternaam)"
+        type: object
+        list: true
+        fields:
+          - name: n
+            label: "Naam"
+            type: string
+            required: true
+          - name: r
+            label: "Rol / ondertitel"
+            type: string
+          - name: b
+            label: "Bio (elke regel wordt een alinea; e-mail en websites worden automatisch klikbaar)"
+            type: text
+          - name: imgs
+            label: "Foto's"
+            type: image
+            list: true

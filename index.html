@@ -1,0 +1,622 @@
+<!-- ============================================================
+     UTOPIA — woon-werkvereniging — BASIS
+     >>> LETTERTYPES: zie ":root".  >>> FOTO'S: zie DATA-blok.
+     ============================================================ -->
+<html lang="nl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Utopia Rotterdam</title>
+<meta name="description" content="Utopia Rotterdam — woon-werkvereniging in de watertoren aan de Watertorenweg. Al meer dan 40 jaar wonen en werken leden hier op het snijvlak van kunst, cultuur en techniek.">
+<meta property="og:title" content="Utopia Rotterdam">
+<meta property="og:description" content="Woon-werkvereniging in de Rotterdamse watertoren — kunst, cultuur en techniek sinds 1978.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_NL">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  /* ====== LETTERTYPES — HIER AANPASSEN ======
+     --font-base    : alles op de site
+     --font-tijdlijn: KOPPEN, JAARTAL en ONDERSCHRIFT in de tijdlijn */
+  --font-base:     "Inter", Helvetica, Arial, sans-serif;
+  --font-tijdlijn: "PP Editorial New", "Fraunces", Georgia, "Times New Roman", serif;
+
+  --bg:#ffffff; --ink:#111111; --muted:#777777; --line:#e6e6e6; --ph:#f3f3f3;
+  --groen:#74c45a;   /* het groen van de poster / het beginvlak */
+  /* ====== TOEN & NU breedte / tussenruimte — HIER AANPASSEN ====== */
+  --tn-maxw:1480px;                 /* maximale breedte van de pagina  */
+  --tn-side:clamp(24px,4vw,60px);   /* marge links/rechts              */
+  --tn-gutter:clamp(48px,9vw,160px);/* tussenruimte tussen Nu en Toen  */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-base);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.imgph{display:flex;align-items:center;justify-content:center;background:var(--ph);color:var(--muted);font-size:11px;letter-spacing:.12em;text-transform:uppercase;width:100%;height:100%}
+.map-img img,.member .ph img{display:block;width:100%;height:100%;object-fit:cover}
+/* LEDEN LIJST */
+.leden-lijst{list-style:none;padding:clamp(20px,4vw,48px) 0;margin:0;columns:2;column-gap:clamp(20px,4vw,48px)}
+@media(max-width:600px){.leden-lijst{columns:1}}
+.leden-lijst li{padding:10px 0;border-bottom:1px solid var(--line);break-inside:avoid}
+.leden-link{font-family:var(--font-base);font-size:clamp(16px,2vw,20px);font-weight:500;color:var(--ink);text-decoration:none}
+.leden-link:hover{color:var(--groen)}
+.leden-kop{font-family:var(--font-base);font-weight:700;font-size:clamp(22px,3.4vw,38px);line-height:1.1;text-transform:none;color:var(--ink);padding-top:clamp(110px,16vh,170px);margin:0 0 clamp(2px,1vh,10px)}
+.leden-flow{font-family:var(--font-base);font-weight:700;font-size:clamp(18px,2.6vw,30px);line-height:2.1;color:var(--ink);padding:clamp(6px,1.2vh,14px) 0 clamp(40px,8vh,80px);margin:0}
+.leden-flow.bestuur{padding-bottom:clamp(28px,6vh,60px)}
+.leden-naam{font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px;text-decoration-color:rgba(17,17,17,.32);cursor:pointer;display:inline-block;position:relative;transform-origin:center;transition:transform .28s cubic-bezier(.22,1,.36,1),color .2s ease}
+.leden-naam:hover{color:var(--groen);text-decoration-color:var(--groen)}
+.leden-komma{font-weight:700;color:var(--ink);display:inline-block;transition:transform .28s cubic-bezier(.22,1,.36,1)}
+.leden-peek{position:fixed;left:0;top:0;z-index:60;pointer-events:none;width:min(260px,32vw);height:auto;box-shadow:0 6px 24px rgba(0,0,0,.22);opacity:0;transform:scale(.94);transition:opacity .18s ease,transform .18s ease;will-change:left,top}
+.leden-peek.show{opacity:1;transform:scale(1)}
+/* MODAL PHOTOS */
+.mph{display:flex;gap:12px;flex-wrap:wrap;padding:24px 24px 0;background:var(--ph);overflow-y:auto;max-height:45vh}
+.mph img{width:calc(50% - 6px);object-fit:cover;display:block;flex-shrink:0}
+.mph img:only-child{width:100%}
+/* BIO paragraphs */
+.bio p{margin:0 0 10px}
+.bio p:last-child{margin:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:baseline;padding:22px clamp(20px,4vw,48px);background:var(--bg)}
+.brand{font-family:var(--font-base);font-weight:700;font-size:20px;line-height:1.05;text-decoration:none;color:var(--ink)}
+.menu{display:flex;gap:clamp(14px,2.4vw,30px)}
+.menu a{font-size:14px;color:var(--muted);text-decoration:none}
+.menu a:hover,.menu a.on{color:var(--ink)}
+
+/* PAGES */
+.page{display:none;position:relative}
+.page.on{display:block}
+.wrap{max-width:1100px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+.eyebrow{font-size:13px;color:var(--muted)}
+h2{font-family:var(--font-base);font-weight:700;font-size:clamp(30px,5vw,48px);line-height:1.08;text-transform:uppercase}
+
+/* TOEN & NU — twee volledige schermen, horizontaal wisselen */
+#toennu{position:relative}
+.tn-header{padding-top:64px;display:flex;align-items:center;justify-content:center;background:var(--bg);min-height:50vh}.tn-tower{max-height:45vh;width:auto;height:auto;object-fit:contain;display:block}.tn-pager{position:sticky;top:0;height:100vh;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tn-pager::-webkit-scrollbar{display:none}
+.tn-slide{min-width:80%;height:100%;overflow:hidden;display:flex;flex-direction:column}
+.tn-label{flex:none;display:flex;align-items:center;justify-content:center;padding:clamp(104px,13vh,124px) 22px 10px}
+.tn-label span{white-space:nowrap;font-family:var(--font-base);font-weight:700;text-transform:uppercase;font-size:clamp(26px,4.2vw,46px);letter-spacing:.02em;color:var(--ink);line-height:1}
+#slideToen .tn-label span{font-style:italic}
+.tn-colscroll{flex:1;min-height:0;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;background-image:radial-gradient(circle, rgba(17,17,17,.13) 1.5px, transparent 1.6px);background-size:30px 30px;background-position:center top}
+.tn-colscroll::-webkit-scrollbar{display:none}
+#slideNu{scroll-snap-align:start}
+#slideToen{scroll-snap-align:end}
+.tn-slide-inner{max-width:760px;margin:0 auto;padding:24px 22px 0;will-change:transform;min-height:100vh;display:flex;flex-direction:column}
+.tn-eyebrow{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.tn-title{font-family:var(--font-base);font-weight:300;text-transform:none;font-size:clamp(34px,9vw,56px);line-height:1;letter-spacing:-.01em;margin-bottom:30px}
+.tn-list{position:relative;flex:1;min-height:0;padding-bottom:90px}
+.tn-list::before{content:"";position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:4px;background:#39ff14;z-index:0}
+.tn-item{position:relative;z-index:1;padding:0 0 52px}
+.tn-text{background:#e2e2de;padding:14px 16px;border-radius:0}
+.tn-lidlink{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;cursor:pointer}
+.tn-lidlink:hover{color:var(--groen)}
+.tn-media{margin-bottom:14px}
+.tn-fig{position:relative;display:block;width:100%;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.14)}
+.tn-fig img{display:block;width:100%;height:auto;opacity:0}
+.tn-reveal{position:absolute;inset:0;display:grid;z-index:3;pointer-events:none}
+.tn-tile{background:#39ff14;transition:opacity .22s ease, transform .22s ease}
+.tn-reveal.go .tn-tile{opacity:0;transform:scale(.35)}
+.tn-revtext{position:absolute;inset:0;z-index:1;padding:16px;color:#111;font-family:var(--font-base);font-weight:700;font-size:clamp(14px,2.2vw,20px);line-height:1.25;text-align:left;overflow:hidden;transition:opacity .3s ease}
+.tn-reveal.go .tn-revtext{opacity:0}
+.tn-fig figcaption{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:flex-start;text-align:left;background:#39ff14;color:#111;font-family:var(--font-base);font-weight:700;font-size:clamp(14px,2.2vw,20px);line-height:1.25;padding:16px;opacity:0;transition:opacity .25s;overflow:hidden;z-index:4}
+.tn-fig:hover figcaption{opacity:1}
+.tn-media.stack{position:relative}
+.tn-media.stack .tn-fig{width:80%}
+.tn-media.stack .tn-fig:nth-child(1){transform:rotate(-2.5deg)}
+.tn-media.stack .tn-fig:nth-child(2){margin-left:auto;margin-top:-6%;transform:rotate(2deg)}
+.tn-media.stack .tn-fig:nth-child(3){margin-top:-5%;transform:rotate(-1.5deg)}
+.tn-media.stack .tn-fig:nth-child(4){margin-left:auto;margin-top:-6%;transform:rotate(2.5deg)}
+.tn-item h4{font-family:var(--font-tijdlijn);font-weight:700;font-size:clamp(20px,4.6vw,29px);line-height:1.12}
+.tn-item h4 .yr{color:var(--muted)}
+.tn-item h4 .yr::before{content:"· "}
+.tn-item p{font-family:var(--font-tijdlijn);font-weight:400;color:var(--ink);margin-top:10px;font-size:clamp(16px,2.5vw,21px);line-height:1.45}
+@media (min-width:768px){
+  .tn-media,.tn-text{max-width:500px;margin-left:auto;margin-right:auto}
+}
+@media (min-width:1000px){
+  .tn-pager{overflow-x:hidden;scroll-snap-type:none}
+  .tn-slide{min-width:0;flex:1 1 50%;width:50%}
+  .tn-arrow{display:none !important}
+}
+.tn-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:20;border:none;background:none;padding:0;color:var(--ink);font-family:var(--font-base);font-weight:300;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(26px,4.2vw,46px);line-height:1;cursor:pointer}
+.tn-arrow-inner{display:inline-block;white-space:nowrap;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.12);padding:14px 10px;transform:rotate(-90deg)}
+.tn-arrow svg{display:none}
+.tn-arrow.left{left:10px}
+.tn-arrow.right{right:10px;font-style:italic}
+@keyframes tn-nudge{0%,100%{transform:translate(0,-50%)}50%{transform:translate(5px,-50%)}}
+@keyframes tn-nudge-l{0%,100%{transform:translate(0,-50%)}50%{transform:translate(-5px,-50%)}}
+.tn-arrow.right{animation:tn-nudge 1.7s ease-in-out infinite}
+.tn-arrow.left{animation:tn-nudge-l 1.7s ease-in-out infinite}
+
+/* LEDEN */
+#leden{min-height:100vh}
+#leden .head{padding:120px 0 30px;max-width:640px}
+#leden .head p{color:var(--muted);margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:28px;padding-bottom:80px}
+.member{cursor:pointer}
+.member .ph{aspect-ratio:4/5}
+.member .nm{margin-top:10px}
+.member .nm b{font-family:var(--font-base);font-weight:700;font-size:16px;display:block}
+.member .nm span{font-size:13px;color:var(--muted)}
+
+/* modal */
+.overlay{position:fixed;inset:0;z-index:60;display:none;place-items:center;padding:24px;background:rgba(0,0,0,.4)}
+.overlay.on{display:grid}
+.modal{background:var(--bg);max-width:600px;width:100%;display:grid;grid-template-columns:220px 1fr;border:1px solid var(--line)}
+.modal .mph img{display:block;width:100%;height:100%;object-fit:cover}
+.modal .mbody{padding:28px;position:relative}
+.modal h3{font-family:var(--font-base);font-weight:700;font-size:24px}
+.modal .role{color:var(--muted);margin-top:4px}
+.modal .bio{margin-top:16px;color:var(--muted)}
+.modal .meta{margin-top:18px;font-size:13px;color:var(--muted)}
+.modal .close{position:absolute;top:14px;right:14px;width:30px;height:30px;border:1px solid var(--line);background:none;cursor:pointer;font-size:16px;color:var(--ink)}
+
+/* CONTACT */
+#contact{min-height:100vh}
+#contact .ct{padding:120px 0 60px;display:grid;grid-template-columns:1fr 1fr;gap:48px}
+#contact .lead{max-width:42ch;margin-top:12px;color:var(--muted)}
+.dl{margin-top:30px}
+.dl .row{display:grid;grid-template-columns:130px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.dl dt{font-size:13px;color:var(--muted)}
+.dl dd a{color:var(--ink)}
+.map-img{aspect-ratio:4/3}
+footer{padding:30px 0;border-top:1px solid var(--line);margin-top:40px;font-size:13px;color:var(--muted)}
+
+
+
+
+@media(max-width:860px){
+  #contact .ct{grid-template-columns:1fr;gap:30px;padding-top:104px}
+  .modal{grid-template-columns:1fr}
+}
+/* ===== STARTSCHERM (poster) — scroll omlaag om de site in te floepen, scroll omhoog voor de poster ===== */
+#startscherm{position:fixed;inset:0;z-index:80;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;transition:transform .6s cubic-bezier(.76,0,.24,1),opacity .55s ease;will-change:transform,opacity;touch-action:none}
+#startscherm.gone{transform:translateY(-101%) scale(1.02);opacity:0;pointer-events:none}
+.ss-stage{flex:1 1 auto;width:100%;display:flex;align-items:center;justify-content:center;padding:clamp(4px,1vh,14px) clamp(20px,4vw,60px) 6px;min-height:0}
+.ss-tower{max-height:100%;max-width:min(92vw,760px);width:auto;height:auto;object-fit:contain;display:block}
+.ss-cue{flex:none;display:flex;flex-direction:column;align-items:center;gap:7px;margin:0 0 clamp(20px,4vh,46px);background:none;border:none;cursor:pointer;color:var(--ink);-webkit-tap-highlight-color:transparent}
+.ss-cue-txt{font-family:var(--font-base);font-weight:600;text-transform:none;letter-spacing:0;font-size:clamp(16px,3.4vw,30px)}
+.ss-cue-chev{width:26px;height:26px;display:block;animation:ss-bounce 1.8s ease-in-out infinite}
+.ss-cue:focus-visible{outline:2px solid var(--ink);outline-offset:6px}
+@keyframes ss-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+.ss-intro{flex:none;width:100%;text-align:center;padding:clamp(54px,10vh,120px) clamp(20px,4vw,60px) clamp(2px,.6vh,8px)}
+.ss-intro-line{display:inline-flex;align-items:baseline;justify-content:center;flex-wrap:nowrap;white-space:nowrap;gap:.25em;font-family:var(--font-base);font-size:clamp(16px,3.4vw,30px);line-height:1.18;max-width:100%}
+.ss-label{font-weight:700;color:var(--ink);white-space:nowrap}
+.ss-phrase{position:relative;display:inline-block;text-align:center;vertical-align:baseline}
+.ss-phrase-text{display:inline-block;white-space:nowrap;font-weight:700;color:var(--ink)}
+.ss-tiles{position:absolute;inset:-3px -5px;display:grid;pointer-events:none;z-index:2}
+.ss-tile{background:#39ff14;opacity:0;transform:scale(.4);transition:opacity .16s ease,transform .16s ease}
+.ss-tiles.cover .ss-tile{opacity:1;transform:scale(1)}
+@media(max-width:520px){
+  .ss-intro{padding-top:clamp(40px,8vh,90px)}
+}
+body.ss-lock{overflow:hidden}
+body.ss-lock nav{opacity:0;pointer-events:none}
+nav{transition:opacity .5s ease .15s}
+
+/* ── Lid-pagina ── */
+.lid-wrap{padding-top:clamp(32px,5vw,64px);padding-bottom:clamp(32px,5vw,64px)}
+.lid-terug{background:none;border:none;font-family:var(--font-base);font-size:15px;color:var(--muted);cursor:pointer;padding:0 0 28px;display:flex;align-items:center;gap:6px}
+.lid-terug:hover{color:var(--ink)}
+.lid-fotos{display:flex;gap:clamp(8px,1.5vw,16px);flex-wrap:wrap;margin-bottom:clamp(24px,4vw,48px)}
+.lid-fotos img{width:calc(33.333% - 12px);max-width:320px;object-fit:cover;aspect-ratio:3/4;display:block}
+.lid-fotos img:only-child{width:clamp(200px,30vw,360px)}
+@media(max-width:600px){.lid-fotos img{width:calc(50% - 6px)}.lid-fotos img:only-child{width:100%}}
+.lid-info h2{font-family:var(--font-base);font-size:clamp(26px,5vw,42px);font-weight:700;margin:0 0 8px}
+.lid-rol{font-family:var(--font-base);font-size:clamp(15px,2vw,18px);color:var(--muted);margin-bottom:clamp(16px,3vw,32px)}
+.lid-bio p{font-family:var(--font-base);font-size:clamp(15px,2vw,19px);line-height:1.6;margin:0 0 14px;color:var(--ink)}
+.lid-bio p:last-child{margin:0}
+.lid-bio a{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:rgba(17,17,17,.4)}
+.lid-bio a:hover{color:var(--groen);text-decoration-color:var(--groen)}
+</style>
+
+<!-- BEGINPAGINA -->
+
+
+<nav>
+  <a class="brand" href="#toennu" data-go="toennu">Utopia<br>Rotterdam</a>
+  <div class="menu">
+    <a href="#toennu" data-go="toennu">Toen &amp; Nu</a>
+    <a href="#leden" data-go="leden">Leden</a>
+    <a href="#contact" data-go="contact">Contact</a>
+  </div>
+</nav>
+
+<section id="startscherm" aria-label="Welkom bij Utopia">
+  <div class="ss-intro">
+    <span class="ss-intro-line">
+      <span class="ss-label">Utopia is</span>
+      <span class="ss-phrase" id="ssPhrase"><span class="ss-phrase-text" id="ssPhraseText" aria-live="polite">do-it-yourself.</span></span>
+    </span>
+  </div>
+  <div class="ss-stage"><img class="ss-tower" src="media/site/watertoren.jpg" alt="Utopia Rotterdam"></div>
+  <button class="ss-cue" id="ssCue" type="button" aria-label="Scroll naar binnen">
+    <span class="ss-cue-txt">scroll naar beneden</span>
+    <svg class="ss-cue-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9 L12 16 L19 9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</section>
+
+<section id="toennu" class="page">
+  <div class="tn-pager" id="tnPager">
+    <section class="tn-slide" id="slideNu">
+      <div class="tn-label"><span>Nu</span></div>
+      <div class="tn-colscroll">
+        <div class="tn-slide-inner" id="tnInnerNu">
+          <div class="tn-list" id="tnListNu"></div>
+        </div>
+      </div>
+    </section>
+    <section class="tn-slide" id="slideToen">
+      <div class="tn-label"><span>Toen</span></div>
+      <div class="tn-colscroll">
+        <div class="tn-slide-inner" id="tnInnerToen">
+          <div class="tn-list" id="tnListToen"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <button class="tn-arrow left" id="tnPrev" aria-label="Naar Nu"><span class="tn-arrow-inner"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 4 L8 12 L16 20 Z" fill="currentColor"/></svg><span>Nu</span></span></button>
+  <button class="tn-arrow right" id="tnNext" aria-label="Naar Toen"><span class="tn-arrow-inner"><span>Toen</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4 L16 12 L8 20 Z" fill="currentColor"/></svg></span></button>
+</section>
+
+<section id="leden" class="page">
+  <div class="wrap">
+    <h2 class="leden-kop">Bestuur</h2>
+    <p class="leden-flow bestuur" id="bestuurGrid"></p>
+    <p class="leden-flow" id="ledenGrid"></p>
+  </div>
+</section>
+
+<section id="lid" class="page">
+  <div class="wrap lid-wrap">
+    <button class="lid-terug" id="lidTerug">← Terug naar leden</button>
+    <div class="lid-fotos" id="lidFotos"></div>
+    <div class="lid-info">
+      <h2 id="lidNaam"></h2>
+      <div class="lid-rol" id="lidRol"></div>
+      <div class="lid-bio" id="lidBio"></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="page">
+  <div class="wrap ct">
+    <div>
+      <p class="eyebrow">Langskomen &amp; aanmelden</p>
+      <h2 style="margin-top:12px">Contact</h2>
+      <p class="lead">Vragen of interesse om lid te worden? Je vindt ons in de watertoren.</p>
+      <dl class="dl">
+        <div class="row"><dt>Adres</dt><dd>Watertoren Utopia, Honingerdijk, Rotterdam</dd></div>
+        <div class="row"><dt>E-mail</dt><dd><a href="mailto:hallo@utopia-toren.nl">hallo@utopia-toren.nl</a></dd></div>
+        <div class="row"><dt>Telefoon</dt><dd>+31 (0)10 330107</dd></div>
+        <div class="row"><dt>KvK-nummer</dt><dd>87654321</dd></div>
+        <div class="row"><dt>Open uren</dt><dd>Zaterdag 10:00–16:00, of op afspraak</dd></div>
+      </dl>
+    </div>
+    <div><div class="map-img" id="mapImg"></div>
+      <footer>Utopia woon-werkvereniging © 2026 — KvK 87654321</footer>
+    </div>
+  </div>
+</section>
+
+<div class="overlay" id="overlay">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="mph" id="mPh"></div>
+    <div class="mbody">
+      <button class="close" id="mClose" aria-label="Sluiten">×</button>
+      <h3 id="mName"></h3>
+      <div class="role" id="mRole"></div>
+      <div class="bio" id="mBio"></div>
+      <div class="meta" id="mMeta"></div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+/* ============================================================
+   DATA wordt geladen uit de map /data — daar bewerk je de inhoud.
+   Foto's staan in de map /media. MAP_IMG = kaartfoto op contactpagina.
+   ============================================================ */
+const MAP_IMG = "";
+
+async function laadData(pad){
+  const r = await fetch(pad);
+  if(!r.ok) throw new Error("Kan " + pad + " niet laden");
+  return (await r.json()).items;
+}
+const [NU, TOEN, LEDEN] = await Promise.all([
+  laadData("data/nu.json"),
+  laadData("data/toen.json"),
+  laadData("data/leden.json")
+]);
+
+function imageBox(url,label){return url ? `<img src="${url}" alt="${label||''}" loading="lazy">` : `<div class="imgph">${label||'foto'}</div>`;}
+document.getElementById("mapImg").innerHTML = imageBox(MAP_IMG,"kaart / locatie");
+
+function fig(o){
+  return `<figure class="tn-fig"><img src="${o.s}" alt="" loading="lazy" decoding="async"><figcaption>${o.c||""}</figcaption></figure>`;
+}
+function media(imgs){
+  if(!imgs||imgs.length===0) return `<div class="tn-media ph"><div class="imgph">foto</div></div>`;
+  if(imgs.length===1) return `<div class="tn-media single">${fig(imgs[0])}</div>`;
+  return `<div class="tn-media stack">${imgs.map(fig).join("")}</div>`;
+}
+function tnLidLink(text,lid){
+  if(!lid||!text) return text;
+  const first=lid.split(" ")[0];
+  const esc=function(s){return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");};
+  const re=new RegExp("("+esc(lid)+"|\\b"+esc(first)+"\\b)","g");
+  return text.replace(re,function(m){return '<a href="#" class="tn-lidlink" data-lid="'+lid+'">'+m+'</a>';});
+}
+function tnItem(o){
+  const yr = o.y ? ` <span class="yr">${o.y}</span>` : "";
+  const tt = tnLidLink(o.t, o.lid), dd = tnLidLink(o.d, o.lid);
+  return `<div class="tn-item">${media(o.imgs)}<div class="tn-text"><h4>${tt}${yr}</h4><p>${dd}</p></div></div>`;
+}
+document.getElementById("tnListNu").innerHTML = NU.map(tnItem).join("");
+document.getElementById("tnListToen").innerHTML = TOEN.map(tnItem).join("");
+document.addEventListener("click",function(e){
+  const a=e.target.closest&&e.target.closest(".tn-lidlink"); if(!a) return;
+  e.preventDefault();
+  const naam=a.getAttribute("data-lid");
+  const m=LEDEN.find(function(x){return x.n===naam;});
+  if(m) openLid(m);
+});
+function revealTiles(fig){
+  if(fig.dataset.revealed) return;
+  fig.dataset.revealed="1";
+  var img=fig.querySelector('img'); if(img) img.style.opacity='1';
+  var cap=fig.querySelector('figcaption');
+  var capText=cap?cap.textContent:"";
+  var COLS=6, ROWS=6, ov=document.createElement('div');
+  ov.className='tn-reveal';
+  ov.style.gridTemplateColumns='repeat('+COLS+',1fr)';
+  ov.style.gridTemplateRows='repeat('+ROWS+',1fr)';
+  for(var r=0;r<ROWS;r++)for(var c=0;c<COLS;c++){
+    var t=document.createElement('div');
+    t.className='tn-tile';
+    t.style.transitionDelay=((r+c)*22+Math.random()*40)+'ms';
+    ov.appendChild(t);
+  }
+  if(capText){
+    var tx=document.createElement('div');
+    tx.className='tn-revtext';
+    tx.textContent=capText;
+    ov.appendChild(tx);
+  }
+  fig.appendChild(ov);
+  setTimeout(function(){ov.classList.add('go');},750);
+  setTimeout(function(){if(ov.parentNode)ov.parentNode.removeChild(ov);},1300);
+}
+document.querySelectorAll('.tn-colscroll').forEach(function(col){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var fig=e.target.closest('.tn-fig');if(fig)revealTiles(fig);io.unobserve(e.target);}});},{root:col,threshold:0.12});
+  col.querySelectorAll('.tn-fig img').forEach(function(img){io.observe(img);});
+});
+
+/* horizontale pager: NU <-> TOEN, met 20% peek van de buurpagina */
+const tnPager=document.getElementById("tnPager");
+const tnPrev=document.getElementById("tnPrev"),tnNext=document.getElementById("tnNext");
+function tnMax(){return tnPager.scrollWidth-tnPager.clientWidth;}
+function tnUpdate(){
+  const max=tnMax();
+  const onToen = max>0 ? (tnPager.scrollLeft/max)>0.5 : false;
+  tnPrev.style.display = onToen ? "flex" : "none";
+  tnNext.style.display = onToen ? "none" : "flex";
+}
+tnPager.addEventListener("scroll",()=>requestAnimationFrame(tnUpdate),{passive:true});
+tnNext.addEventListener("click",()=>tnPager.scrollTo({left:tnMax(),behavior:"smooth"}));
+tnPrev.addEventListener("click",()=>tnPager.scrollTo({left:0,behavior:"smooth"}));
+function tnReset(){tnPager.scrollLeft=0;tnUpdate();tnCounterInit();}
+
+/* desktop: tegengestelde scroll \u2014 omlaag scrollen = links omhoog, rechts omlaag */
+const colNu=document.querySelector('#slideNu .tn-colscroll');
+const colToen=document.querySelector('#slideToen .tn-colscroll');
+function tnDesktop(){return window.innerWidth>=1000;}
+function tnCounterInit(){ if(tnDesktop()){ colNu.scrollTop=colNu.scrollHeight; colToen.scrollTop=0; } }
+tnPager.addEventListener('wheel',function(e){
+  if(!tnDesktop()) return;
+  if(ssActive) return;
+  if(e.deltaY<0 && colToen.scrollTop<=1 && colNu.scrollTop>=(colNu.scrollHeight-colNu.clientHeight-1)){
+    e.preventDefault(); ssIn(); return;
+  }
+  e.preventDefault();
+  colNu.scrollTop  -= e.deltaY;
+  colToen.scrollTop += e.deltaY;
+},{passive:false});
+
+function maakNamen(container,lijst){
+  lijst.forEach(function(m,i){
+    const a=document.createElement("a");
+    a.href="#"; a.className="leden-naam"; a.textContent=m.n; a._lid=m;
+    a.addEventListener("click",function(e){e.preventDefault();openLid(m);});
+    container.appendChild(a);
+    if(i<lijst.length-1){
+      const c=document.createElement("span");
+      c.className="leden-komma"; c.textContent=", ";
+      container.appendChild(c);
+    }
+  });
+}
+/* dynamische water-hover: naam 2x groter, de rest (namen en kommas) wijkt vloeiend opzij zonder te overlappen */
+const ledenPeek=document.createElement("img");
+ledenPeek.className="leden-peek"; ledenPeek.alt="";
+document.body.appendChild(ledenPeek);
+const peekOk=window.matchMedia&&window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+function peekHide(){ ledenPeek.classList.remove("show"); }
+function peekMove(e){
+  const w=ledenPeek.offsetWidth||260, h=ledenPeek.offsetHeight||320;
+  let x=e.clientX+24, y=e.clientY-h/2;
+  if(x+w>window.innerWidth-12) x=e.clientX-24-w;
+  y=Math.max(12,Math.min(window.innerHeight-h-12,y));
+  ledenPeek.style.left=x+"px"; ledenPeek.style.top=y+"px";
+}
+function waterHover(container){
+  const kids=Array.prototype.slice.call(container.children);
+  function reset(){ kids.forEach(function(n){ n.style.transform=""; n.style.zIndex=""; }); }
+  container.addEventListener("mouseover",function(e){
+    const a=e.target.closest&&e.target.closest(".leden-naam"); if(!a) return;
+    if(peekOk){
+      const lid=a._lid;
+      if(lid&&lid.imgs&&lid.imgs[0]){ ledenPeek.src=lid.imgs[0]; ledenPeek.classList.add("show"); peekMove(e); }
+      else peekHide();
+    }
+    const hi=kids.indexOf(a);
+    const shift=a.offsetWidth/2+8;
+    kids.forEach(function(n,i){
+      if(i===hi){ n.style.transform="scale(2)"; n.style.zIndex="5"; }
+      else if(i<hi){ n.style.transform="translateX(-"+shift+"px)"; n.style.zIndex=""; }
+      else{ n.style.transform="translateX("+shift+"px)"; n.style.zIndex=""; }
+    });
+  });
+  container.addEventListener("mouseleave",function(){ reset(); peekHide(); });
+  if(peekOk) container.addEventListener("mousemove",peekMove);
+  container.addEventListener("click",peekHide);
+}
+const BESTUUR_NAMEN=["Betty van den Boogert","Tineke Werlemann","Walter Vincent"];
+const bestuurLeden=BESTUUR_NAMEN.map(function(nm){return LEDEN.find(function(m){return m.n===nm;});}).filter(Boolean);
+const bestuurGrid=document.getElementById("bestuurGrid");
+const ledenGrid=document.getElementById("ledenGrid");
+maakNamen(bestuurGrid,bestuurLeden);
+maakNamen(ledenGrid,LEDEN);
+waterHover(bestuurGrid);
+waterHover(ledenGrid);
+const overlay=document.getElementById("overlay");
+const LID_LINK_SKIP=["weelderotterdam.nl"];
+function lidLinkify(s){
+  const re=/([\w.+-]+@[\w-]+(?:\.[\w-]+)+)|((?:https?:\/\/|www\.)[^\s<]+|\b[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:nl|com|org|net|eu|be)\b(?:\/[^\s<]*)?)/gi;
+  return s.replace(re,function(match,email,url){
+    if(email) return '<a href="mailto:'+email+'">'+email+'</a>';
+    let disp=url, trail="";
+    const m2=disp.match(/[.,;:!?)]+$/);
+    if(m2){ trail=m2[0]; disp=disp.slice(0,-trail.length); }
+    const low=disp.toLowerCase();
+    if(LID_LINK_SKIP.some(function(d){return low.indexOf(d)>-1;})) return match;
+    const href=/^https?:\/\//i.test(disp)?disp:"https://"+disp;
+    return '<a href="'+href+'" target="_blank" rel="noopener">'+disp+'</a>'+trail;
+  });
+}
+function openLid(m){
+  // Fotos
+  const fotoEl=document.getElementById("lidFotos");
+  fotoEl.innerHTML=(m.imgs&&m.imgs.length>0)
+    ?m.imgs.map(u=>`<img src="${u}" alt="${m.n}" loading="lazy">`).join("")
+    :"";
+  document.getElementById("lidNaam").textContent=m.n;
+  document.getElementById("lidRol").textContent=m.r;
+  const bioEl=document.getElementById("lidBio");
+  bioEl.innerHTML=m.b.split("\n").filter(l=>l.trim()).map(l=>`<p>${lidLinkify(l)}</p>`).join("");
+  go("lid");
+  window.scrollTo({top:document.getElementById("lid").offsetTop,behavior:"smooth"});
+}
+document.getElementById("lidTerug").addEventListener("click",()=>{
+  go("leden");
+  window.scrollTo({top:document.getElementById("leden").offsetTop,behavior:"smooth"});
+});
+function closeMember(){overlay.classList.remove("on");}
+document.getElementById("mClose").addEventListener("click",closeMember);
+overlay.addEventListener("click",e=>{if(e.target===overlay)closeMember();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMember();});
+
+let active="toennu";
+const pages=["toennu","leden","lid","contact"];
+function go(id){
+  if(!pages.includes(id))id="toennu";
+  active=id;
+  pages.forEach(p=>document.getElementById(p).classList.toggle("on",p===id));
+  document.querySelectorAll(".menu a").forEach(a=>a.classList.toggle("on",a.dataset.go===id));
+  if(id==="toennu"){requestAnimationFrame(tnReset);}
+  try{ history.replaceState(null,"","#"+id); }catch(e){}
+}
+document.querySelectorAll("[data-go]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();var id=a.dataset.go;go(id);var el=document.getElementById(id);if(el)window.scrollTo({top:el.offsetTop,behavior:"smooth"});}));
+
+
+window.addEventListener("resize",tnUpdate);
+
+
+
+/* ===== STARTSCHERM: poster die wegfloept bij scrollen ===== */
+let ssActive=true;
+const ssEl=document.getElementById("startscherm");
+document.body.classList.add("ss-lock");
+function ssOut(){
+  if(!ssActive) return;
+  ssActive=false;
+  ssEl.classList.add("gone");
+  document.body.classList.remove("ss-lock");
+}
+function ssIn(){
+  if(ssActive) return;
+  ssActive=true;
+  ssEl.classList.remove("gone");
+  document.body.classList.add("ss-lock");
+  tnReset();
+}
+ssEl.addEventListener("click",ssOut);
+document.addEventListener("keydown",function(e){
+  if(ssActive && ["ArrowDown"," ","Spacebar","Enter","PageDown"].includes(e.key)){e.preventDefault();ssOut();}
+});
+ssEl.addEventListener("wheel",function(e){
+  if(!ssActive) return;
+  if(e.deltaY>0){e.preventDefault();ssOut();}
+},{passive:false});
+let ssTY=null;
+ssEl.addEventListener("touchstart",function(e){ssTY=e.touches[0].clientY;},{passive:true});
+ssEl.addEventListener("touchmove",function(e){
+  if(!ssActive||ssTY===null) return;
+  if(ssTY-e.touches[0].clientY>40){ssOut();ssTY=null;}
+},{passive:true});
+var ssBrand=document.querySelector(".brand");
+if(ssBrand) ssBrand.addEventListener("click",function(){ssIn();});
+let ssBackY=null;
+document.querySelectorAll(".tn-colscroll").forEach(function(col){
+  col.addEventListener("touchstart",function(e){ssBackY=e.touches[0].clientY;},{passive:true});
+  col.addEventListener("touchmove",function(e){
+    if(ssActive||tnDesktop()||ssBackY===null) return;
+    if(col.scrollTop<=0 && e.touches[0].clientY-ssBackY>70){ssIn();ssBackY=null;}
+  },{passive:true});
+});
+
+/* ===== beginscherm: wisselende zin met groene-tegel-effect ===== */
+(function(){
+  const PHRASES=["do-it-yourself.","een creatief netwerk.","nooit af.","altijd in ontwikkeling.","onderdeel van de stad.","ver voor zijn tijd.","altijd zichzelf gebleven."];
+  const wrap=document.getElementById("ssPhrase");
+  const textEl=document.getElementById("ssPhraseText");
+  if(!wrap||!textEl) return;
+  let idx=Math.max(0,PHRASES.indexOf((textEl.textContent||"").trim()));
+  function fitWidth(){ wrap.style.width=""; }
+  function buildTiles(){
+    const COLS=6,ROWS=4,ov=document.createElement("div");
+    ov.className="ss-tiles";
+    ov.style.gridTemplateColumns="repeat("+COLS+",1fr)";
+    ov.style.gridTemplateRows="repeat("+ROWS+",1fr)";
+    for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
+      const t=document.createElement("div");
+      t.className="ss-tile";
+      t.style.transitionDelay=((r+c)*12+Math.random()*26)+"ms";
+      ov.appendChild(t);
+    }
+    wrap.appendChild(ov);
+    return ov;
+  }
+  function cycle(){
+    if(!ssActive) return;
+    const ov=buildTiles();
+    requestAnimationFrame(function(){requestAnimationFrame(function(){ov.classList.add("cover");});});
+    setTimeout(function(){
+      idx=(idx+1)%PHRASES.length;
+      textEl.textContent=PHRASES[idx];
+      ov.classList.remove("cover");
+      setTimeout(function(){if(ov.parentNode)ov.parentNode.removeChild(ov);},420);
+    },300);
+  }
+  function init(){ fitWidth(); }
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(init);} else { init(); }
+  window.addEventListener("load",init);
+  window.addEventListener("resize",fitWidth);
+  setInterval(cycle,1500);
+})();
+go("toennu");
+window.addEventListener("load",tnReset);
+</script>

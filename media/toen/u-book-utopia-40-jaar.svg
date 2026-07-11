@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 680" width="500" height="680">
+  <rect width="500" height="680" fill="white"/>
+  <rect x="20" y="16" width="460" height="92" fill="#cc1818"/>
+  <rect x="20" y="16" width="460" height="92" fill="none" stroke="black" stroke-width="6"/>
+  <text x="250" y="82" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="72" fill="white" text-anchor="middle">U-book</text>
+  <rect x="20" y="122" width="460" height="542" fill="white" stroke="black" stroke-width="8"/>
+  <text x="250" y="230" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="84" fill="black" text-anchor="middle">UTOPIA</text>
+  <text x="250" y="318" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="68" fill="black" text-anchor="middle">ROTTERDAM</text>
+  <text x="250" y="530" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="280" fill="#cc1818" text-anchor="middle">40</text>
+  <text x="250" y="638" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="54" fill="black" text-anchor="middle" letter-spacing="22">JAAR</text>
+</svg>
